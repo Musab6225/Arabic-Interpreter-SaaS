@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Arabic-Interpreter-SaaS",
+    "slug": "Arabic-Interpreter-SaaS",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.musabnew1.ArabicInterpreterSaaS"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b5c39900-9c0b-4069-bd1c-ce4b8a6a12cb"
+      }
+    }
+  }
+}
