@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -21,13 +21,18 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.musabnew1.ArabicInterpreterSaaS"
+      "package": "com.musabnew1.ArabicInterpreterSaaS",
+      "jsEngine": "hermes"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
       "output": "single"
     },
+    "plugins": [
+  "expo-router",
+  "react-native-svg"
+],
     "extra": {
       "eas": {
         "projectId": "b5c39900-9c0b-4069-bd1c-ce4b8a6a12cb"
