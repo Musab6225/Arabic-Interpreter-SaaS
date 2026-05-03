@@ -30,9 +30,8 @@
       "output": "single"
     },
     "plugins": [
-  "expo-router",
-  "react-native-svg"
-],
+      "expo-router"
+    ],
     "extra": {
       "eas": {
         "projectId": "b5c39900-9c0b-4069-bd1c-ce4b8a6a12cb"
