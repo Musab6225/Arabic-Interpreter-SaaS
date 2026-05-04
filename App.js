@@ -1,16 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from './src/theme/ThemeContext';
 import { LanguageProvider } from './src/i18n/LanguageContext';
+import { AnalyticsProvider } from './src/context/AnalyticsContext';
+import { SpacedRepetitionProvider } from './src/context/SpacedRepetitionContext';
 import AppNavigator from './src/navigation/AppNavigator';
+import OnboardingScreen from './src/screens/OnboardingScreen';
+import { OnboardingStorage } from './src/services/OnboardingStorage';
 
 export default function App() {
+  const [onboardingDone, setOnboardingDone] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    OnboardingStorage.isComplete().then(done => setOnboardingDone(done));
+  }, []);
+
+  const handleOnboardingComplete = async () => {
+    await OnboardingStorage.setComplete();
+    setOnboardingDone(true);
+  };
+
+  // Still checking AsyncStorage — show nothing to avoid flash
+  if (onboardingDone === null) return <View style={{ flex: 1, backgroundColor: '#0A0E17' }} />;
+
+  // Show onboarding for first-time users
+  if (!onboardingDone) {
+    return (
+      <LanguageProvider>
+        <ThemeProvider>
+          <OnboardingScreen onComplete={handleOnboardingComplete} />
+        </ThemeProvider>
+      </LanguageProvider>
+    );
+  }
+
+  // Normal app for returning users
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
+        <AnalyticsProvider>
+          <SpacedRepetitionProvider>
+            <NavigationContainer>
+              <AppNavigator />
+            </NavigationContainer>
+          </SpacedRepetitionProvider>
+        </AnalyticsProvider>
       </ThemeProvider>
     </LanguageProvider>
   );

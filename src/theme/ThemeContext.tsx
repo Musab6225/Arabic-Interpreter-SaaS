@@ -2,67 +2,98 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useColorScheme, StyleSheet } from 'react-native';
 
 const darkColors = {
-  background: '#0D1117',
-  surface: '#161B22',
-  primary: '#58A6B0',
-  text: '#E6EDF3',
-  textMuted: '#8B949E',
-  tabBar: '#161B22',
-  tabBarActive: '#58A6B0',
-  tabBarInactive: '#8B949E',
-  divider: '#30363D',
-  inputBackground: '#21262D',
-  card: '#161B22',
+  background: '#0A0E17',
+  surface: '#111827',
+  surfaceElevated: '#1A2236',
+  surfaceGlass: 'rgba(17, 24, 39, 0.85)',
+  primary: '#3B82F6',
+  primaryMuted: '#1E40AF',
+  accent: '#10B981',
+  accentMuted: '#059669',
+  text: '#F1F5F9',
+  textSecondary: '#94A3B8',
+  textMuted: '#64748B',
+  tabBar: '#0F172A',
+  tabBarActive: '#3B82F6',
+  tabBarInactive: '#475569',
+  divider: 'rgba(148, 163, 184, 0.12)',
+  inputBackground: '#1E293B',
+  card: '#111827',
+  cardBorder: 'rgba(148, 163, 184, 0.08)',
+  success: '#10B981',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  overlay: 'rgba(0, 0, 0, 0.7)',
+  gradientStart: '#1E3A5F',
+  gradientEnd: '#0F172A',
 };
 
 const lightColors = {
-  background: '#F8F9FA',
+  background: '#F8FAFC',
   surface: '#FFFFFF',
-  primary: '#1A5F7A',
-  text: '#1C1C1E',
-  textMuted: '#8E8E93',
+  surfaceElevated: '#F1F5F9',
+  surfaceGlass: 'rgba(255, 255, 255, 0.85)',
+  primary: '#1D4ED8',
+  primaryMuted: '#1E40AF',
+  accent: '#059669',
+  accentMuted: '#047857',
+  text: '#0F172A',
+  textSecondary: '#475569',
+  textMuted: '#94A3B8',
   tabBar: '#FFFFFF',
-  tabBarActive: '#1A5F7A',
-  tabBarInactive: '#8E8E93',
-  divider: '#E5E5EA',
-  inputBackground: '#F2F2F7',
+  tabBarActive: '#1D4ED8',
+  tabBarInactive: '#94A3B8',
+  divider: 'rgba(148, 163, 184, 0.15)',
+  inputBackground: '#F1F5F9',
   card: '#FFFFFF',
+  cardBorder: 'rgba(148, 163, 184, 0.12)',
+  success: '#059669',
+  warning: '#D97706',
+  error: '#DC2626',
+  overlay: 'rgba(0, 0, 0, 0.5)',
+  gradientStart: '#DBEAFE',
+  gradientEnd: '#EFF6FF',
 };
 
 const ThemeContext = createContext(undefined);
 
 export function ThemeProvider({ children }) {
   const systemColorScheme = useColorScheme();
-  
-  // 1. Add state to track manual selection
-  // We initialize it based on the phone's system setting
   const [isDark, setIsDark] = useState(systemColorScheme === 'dark');
 
-  // 2. Sync with system if the user hasn't manually toggled yet (Optional)
   useEffect(() => {
     setIsDark(systemColorScheme === 'dark');
   }, [systemColorScheme]);
 
-  // 3. Define the toggle function your SettingsScreen is looking for[cite: 1]
   const toggleTheme = () => {
     setIsDark((prev) => !prev);
   };
 
   const theme = {
     colors: isDark ? darkColors : lightColors,
-    typography: { 
-      fontFamily: 'System', 
-      fontFamilyBold: 'System' 
+    typography: {
+      fontFamily: 'System',
+      fontFamilyBold: 'System',
+      sizes: {
+        xs: 11,
+        sm: 13,
+        md: 15,
+        lg: 18,
+        xl: 22,
+        '2xl': 28,
+        '3xl': 34,
+      },
     },
-    spacing: { md: 16, lg: 24 },
-    borderRadius: { md: 8, lg: 12 },
+    spacing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
+    borderRadius: { sm: 8, md: 12, lg: 16, xl: 20, full: 9999 },
     shadows: {
-      sm: { shadowOpacity: 0.1, elevation: 2 },
-    }
+      sm: { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2 },
+      md: { shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 8, elevation: 4 },
+      lg: { shadowColor: '#000', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.15, shadowRadius: 16, elevation: 8 },
+    },
   };
 
   return (
-    // 4. Add toggleTheme to the Provider value[cite: 1]
     <ThemeContext.Provider value={{ theme, isDark, toggleTheme }}>
       {children}
     </ThemeContext.Provider>

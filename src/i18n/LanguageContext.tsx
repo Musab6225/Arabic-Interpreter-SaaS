@@ -3,7 +3,7 @@ import { I18nManager } from 'react-native';
 
 const translations = {
   en: { search: 'Search', glossary: 'Glossary', settings: 'Settings', noResults: 'No results found', searchPlaceholder: 'Search terms...' },
-  ar: { search: 'بحث', glossary: 'المصطلحات', settings: 'الإعدادات', noResults: 'لم يتم العثور على نتائج', searchPlaceholder: 'ابحث عن المصطلحات...' }
+  ar: { search: '[بحث]{dir="rtl"}', glossary: '[المصطلحات]{dir="rtl"}', settings: '[الإعدادات]{dir="rtl"}', noResults: '[لم يتم العثور على نتائج]{dir="rtl"}', searchPlaceholder: '[ابحث عن المصطلحات]{dir="rtl"}...' }
 };
 
 const LanguageContext = createContext(undefined);

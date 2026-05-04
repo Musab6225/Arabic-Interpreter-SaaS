@@ -26,13 +26,13 @@ export const CustomTermStorage = {
     try {
       const terms = await this.getAll();
       const existingIndex = terms.findIndex(t => t.id === term.id);
-      
+     
       if (existingIndex >= 0) {
         terms[existingIndex] = { ...term, updatedAt: new Date().toISOString() };
       } else {
         terms.push(term);
       }
-      
+     
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(terms));
     } catch (error) {
       console.error('Error saving custom term:', error);
