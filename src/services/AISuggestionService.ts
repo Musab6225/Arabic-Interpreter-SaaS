@@ -9,30 +9,44 @@ export async function fetchAISuggestion(
   englishTerm: string,
   category: 'medical' | 'legal'
 ): Promise<AISuggestion> {
-  const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
 
-  console.log("API KEY EXISTS:", !!apiKey);
-  console.log("KEY PREVIEW:", apiKey?.slice(0, 12));
+  const apiKey = process.env.EXPO_PUBLIC_GROQ_API_KEY;
 
   if (!apiKey) {
-    throw new Error('No API key found. Add EXPO_PUBLIC_GEMINI_API_KEY to your .env file.');
+    throw new Error('No API key found. Add EXPO_PUBLIC_GROQ_API_KEY to your .env file.');
   }
 
-  const prompt = `You are an expert Arabic interpreter specializing in ${category} terminology. Translate this ${category} term into three Arabic dialects: "${englishTerm}". Respond with ONLY a valid JSON object, no markdown, no backticks, no explanation. Use exactly these four fields: arabicMSA, arabicEgyptian, arabicLevantine, notes. Example: {"arabicMSA":"قلب","arabicEgyptian":"قلب","arabicLevantine":"قلب","notes":""}`;
+  const prompt = `You are an expert Arabic interpreter specializing in ${category} terminology.
+Translate this ${category} term into three Arabic dialects: "${englishTerm}"
+You MUST respond with ONLY a valid JSON object, no markdown, no explanation, no backticks.
+The JSON must have exactly these four fields:
+- arabicMSA: Modern Standard Arabic (فصحى)
+- arabicEgyptian: Egyptian colloquial Arabic (عامية مصرية)
+- arabicLevantine: Levantine colloquial Arabic (شامية)
+- notes: short English note max 20 words or empty string
+Only provide the JSON. Example: {"arabicMSA":"قلب","arabicEgyptian":"ألب","arabicLevantine":"قلب","notes":""}`;
 
   let response: Response;
+
   try {
-    response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-001:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.2, maxOutputTokens: 300 },
-        }),
-      }
-    );
+    response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        temperature: 0.2,
+        max_tokens: 300,
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+      }),
+    });
   } catch (networkError) {
     throw new Error('Network error — check your internet connection.');
   }
@@ -43,10 +57,10 @@ export async function fetchAISuggestion(
   }
 
   const data = await response.json();
-  const rawText: string = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  const rawText: string = data?.choices?.[0]?.message?.content ?? '';
 
   if (!rawText) {
-    throw new Error('No response from Gemini. Please try again.');
+    throw new Error('No response from Groq. Please try again.');
   }
 
   const cleaned = rawText.replace(/```json|```/g, '').trim();

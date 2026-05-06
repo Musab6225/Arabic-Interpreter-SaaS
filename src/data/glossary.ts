@@ -9,7 +9,7 @@ export interface GlossaryItem {
   // Updated to include Legal categories
   category: 
     | 'Anatomy' | 'Vision' | 'Dental' | 'Childbirth' | 'Mental Health' | 'Cardiology' | 'Emergency'
-    | 'Civil' | 'Criminal' | 'Immigration' | 'Family Law' | 'Traffic' | 'Courtroom';
+    | 'Civil' | 'Criminal' | 'Immigration' | 'Family Law' | 'Traffic' | 'Courtroom'| 'Symptoms'| 'Procedures'| 'Medications'| 'Civil' | 'Courtroom';
 }
 
 export const GLOSSARY_DB: GlossaryItem[] = [
@@ -139,7 +139,15 @@ export const GLOSSARY_DB: GlossaryItem[] = [
   { id: 'v62', english: 'Iris', arabicMSA: 'قزحية', arabicEgyptian: 'قزحية / نن العين', arabicLevantine: 'قزحية', category: 'Vision' },
   { id: 'v63', english: 'Pupil', arabicMSA: 'بؤبؤ', arabicEgyptian: 'نني العين', arabicLevantine: 'بؤبؤ', category: 'Vision' },
   { id: 'v64', english: 'Glaucoma', arabicMSA: 'زرق / مياه زرقاء', arabicEgyptian: 'مية زرقا', arabicLevantine: 'مي زرقا', category: 'Vision' },
-
+{
+    "id": "gen_15",
+    "english": "Blurred vision",
+    "arabicMSA": "رؤية مُتَضَخِّمَة",
+    "arabicEgyptian": "رؤية مشوشة",
+    "arabicLevantine": "رؤية مُتَضَخِّمَة",
+    "category": "Medical",
+    "notes": ""
+  },
 
   // --- DENTAL ---
   { id: 'd1', english: 'Braces', arabicMSA: 'تقويم الأسنان', arabicEgyptian: 'تقويم', arabicLevantine: 'تقويم', category: 'Dental' },
@@ -398,6 +406,36 @@ export const GLOSSARY_DB: GlossaryItem[] = [
   { id: 'er49', english: 'Abrasion', arabicMSA: 'سحجة', arabicEgyptian: 'خربوش / كشط', arabicLevantine: 'قشط جلدي', category: 'Emergency' },
   { id: 'er50', english: 'Puncture Wound', arabicMSA: 'جرح نافذ', arabicEgyptian: 'خرم / طعنة', arabicLevantine: 'جرح غائر', category: 'Emergency' },
   { id: 'er51', english: 'Narcan', arabicMSA: 'ناركان', arabicEgyptian: 'دوا الجرعة الزيادة', arabicLevantine: 'ناركان', category: 'Emergency' },
+
+
+// --- SYMPTOMS ---
+  { id: 'sym1', english: 'Nausea', arabicMSA: 'غثيان', arabicEgyptian: 'غممان نفس', arabicLevantine: 'لعيان نفس', category: 'Symptoms' },
+  { id: 'sym2', english: 'Vomiting', arabicMSA: 'قيء', arabicEgyptian: 'ترجيع', arabicLevantine: 'استفراغ', category: 'Symptoms' },
+  { id: 'sym6', english: 'Chest pain', arabicMSA: 'ألم في الصدر', arabicEgyptian: 'وجع في الصدر', arabicLevantine: 'وجع صدر', category: 'Symptoms' },
+
+
+  // --- PROCEDURES ---
+  { id: 'pr1', english: 'Blood transfusion', arabicMSA: 'نقل دم', arabicEgyptian: 'نقل دم', arabicLevantine: 'نقل دم', category: 'Procedures' },
+  { id: 'pr6', english: 'MRI', arabicMSA: 'رنين مغناطيسي', arabicEgyptian: 'أشعة رنين', arabicLevantine: 'رنين مغناطيسي', category: 'Procedures' },
+  { id: 'pr13', english: 'ECG', arabicMSA: 'تخطيط القلب', arabicEgyptian: 'رسم قلب', arabicLevantine: 'تخطيط قلب', category: 'Procedures' },
+
+  // --- CONDITIONS ---
+  { id: 'cn1', english: 'Fracture', arabicMSA: 'كسر', arabicEgyptian: 'كسر', arabicLevantine: 'كسر', category: 'Conditions' },
+  { id: 'cn8', english: 'Diabetes', arabicMSA: 'مرض السكري', arabicEgyptian: 'السكر', arabicLevantine: 'سكري', category: 'Conditions' },
+  { id: 'cn11', english: 'Stroke', arabicMSA: 'سكتة دماغية', arabicEgyptian: 'جلطة في المخ', arabicLevantine: 'جلطة دماغية', category: 'Conditions' },
+
+  // --- MEDICATIONS ---
+  { id: 'md1', english: 'Antibiotic', arabicMSA: 'مضاد حيوي', arabicEgyptian: 'مضاد حيوي', arabicLevantine: 'مضاد حيوي', category: 'Medications' },
+  { id: 'md2', english: 'Painkiller', arabicMSA: 'مسكن للآلام', arabicEgyptian: 'مسكن', arabicLevantine: 'مسكن', category: 'Medications' },
+  { id: 'md7', english: 'Inhaler', arabicMSA: 'بخاخ استنشاق', arabicEgyptian: 'بخاخة', arabicLevantine: 'بخاخ', category: 'Medications' },
+
+
+
+
+
+
+
+
 
 
   // --- NEW LEGAL TERMINOLOGY (BATCH 1) ---

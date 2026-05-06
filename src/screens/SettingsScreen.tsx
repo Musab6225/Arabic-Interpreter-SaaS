@@ -250,41 +250,7 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Chain of Custody */}
-        <Text style={styles.sectionTitle}>Chain of Custody</Text>
-        <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.cardBorder }]}>
-          {currentSession ? (
-            <SettingRow
-              icon={Square}
-              label="End Active Session"
-              value={`${currentSession.termAccesses.length} terms logged`}
-              onPress={handleEndSession}
-              badge="LIVE"
-              badgeColor="#e74c3c"
-            />
-          ) : (
-            <SettingRow
-              icon={Play}
-              label="Start New Session"
-              value="Tamper-evident logging"
-              onPress={handleStartSession}
-            />
-          )}
-          <SettingRow
-            icon={History}
-            label="Session History"
-            value={`${sessionHistory.length} records`}
-            onPress={navigateToSessionHistory}
-          />
-          <SettingRow
-            icon={Download}
-            label="Export Custody Log"
-            value="JSON"
-            onPress={handleExportLog}
-          />
-        </View>
-
-        {/* Intelligence & Learning */}
+                {/* Intelligence & Learning */}
         <Text style={styles.sectionTitle}>Intelligence & Learning</Text>
         <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.cardBorder }]}>
           <SettingRow

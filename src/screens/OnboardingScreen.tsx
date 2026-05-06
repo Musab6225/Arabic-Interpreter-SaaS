@@ -1,4 +1,3 @@
-cat > src/screens/OnboardingScreen.tsx << 'ENDOFFILE'
 import React, { useState, useRef } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
@@ -262,4 +261,3 @@ const styles = StyleSheet.create({
   nextBtn: { padding: 18, borderRadius: 16, alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 8, elevation: 4 },
   nextBtnText: { color: '#fff', fontSize: 17, fontWeight: '700' },
 });
-ENDOFFILE

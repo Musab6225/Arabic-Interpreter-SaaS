@@ -35,7 +35,7 @@ export default function GlossaryScreen() {
   const [selectedTermId, setSelectedTermId] = useState<string | null>(null);
 
   const categories = {
-    Medical: ['Anatomy', 'Vision', 'Dental', 'Childbirth', 'Mental Health', 'Cardiology', 'Emergency'],
+    Medical: ['Anatomy', 'Vision', 'Dental', 'Childbirth', 'Mental Health', 'Cardiology', 'Emergency', 'Symptoms', 'Procedures', 'Conditions', 'Medications'],
     Legal: ['Civil', 'Criminal', 'Immigration', 'Family Law', 'Traffic', 'Courtroom']
   };
 

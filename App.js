@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from './src/theme/ThemeContext';
 import { LanguageProvider } from './src/i18n/LanguageContext';
@@ -10,7 +11,7 @@ import OnboardingScreen from './src/screens/OnboardingScreen';
 import { OnboardingStorage } from './src/services/OnboardingStorage';
 
 export default function App() {
-  const [onboardingDone, setOnboardingDone] = useState<boolean | null>(null);
+  const [onboardingDone, setOnboardingDone] = useState(null);
 
   useEffect(() => {
     OnboardingStorage.isComplete().then(done => setOnboardingDone(done));
@@ -27,26 +28,30 @@ export default function App() {
   // Show onboarding for first-time users
   if (!onboardingDone) {
     return (
-      <LanguageProvider>
-        <ThemeProvider>
-          <OnboardingScreen onComplete={handleOnboardingComplete} />
-        </ThemeProvider>
-      </LanguageProvider>
+      <SafeAreaProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <OnboardingScreen onComplete={handleOnboardingComplete} />
+          </ThemeProvider>
+        </LanguageProvider>
+      </SafeAreaProvider>
     );
   }
 
   // Normal app for returning users
   return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <AnalyticsProvider>
-          <SpacedRepetitionProvider>
-            <NavigationContainer>
-              <AppNavigator />
-            </NavigationContainer>
-          </SpacedRepetitionProvider>
-        </AnalyticsProvider>
-      </ThemeProvider>
-    </LanguageProvider>
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <ThemeProvider>
+          <AnalyticsProvider>
+            <SpacedRepetitionProvider>
+              <NavigationContainer>
+                <AppNavigator />
+              </NavigationContainer>
+            </SpacedRepetitionProvider>
+          </AnalyticsProvider>
+        </ThemeProvider>
+      </LanguageProvider>
+    </SafeAreaProvider>
   );
 }

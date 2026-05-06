@@ -1,4 +1,3 @@
-cat > src/services/OnboardingStorage.ts << 'ENDOFFILE'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const KEY = '@onboarding_complete';
@@ -28,4 +27,3 @@ export const OnboardingStorage = {
     } catch {}
   },
 };
-ENDOFFILE
