@@ -2,7 +2,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Search, BookOpen, Settings, Plus } from 'lucide-react-native';
+import { Search, BookOpen, Settings, Plus, ShieldCheck } from 'lucide-react-native';
 import { useTheme } from '../theme/ThemeContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import * as Haptics from 'expo-haptics';
@@ -28,7 +28,7 @@ function SettingsStackNavigator() {
   );
 }
 
-export default function AppNavigator() {
+export default function AppNavigator() { 
   const { theme } = useTheme();
   const { t } = useLanguage();
 
@@ -105,6 +105,19 @@ export default function AppNavigator() {
         }}
         listeners={{ tabPress: handleTabPress }}
       />
+
+      <Tab.Screen
+        name="Ethics"
+        component={EthicsScreen}
+        options={{
+          tabBarLabel: 'Ethics',
+          tabBarIcon: ({ color, focused }) => (
+            <ShieldCheck size={22} color={color} strokeWidth={focused ? 2.5 : 1.8} />
+          ),
+        }}
+        listeners={{ tabPress: handleTabPress }}
+      />
+
     </Tab.Navigator>
   );
 }
